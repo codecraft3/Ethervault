@@ -1,0 +1,23 @@
+# --- Foundry ---
+out/
+cache/
+broadcast/
+
+# --- Dependencies ---
+# If you want to commit your lib folder (standard for submodules), 
+# remove the line below.
+lib/
+
+# --- Environment Secrets ---
+.env
+.env.local
+.env.*.local
+
+# --- Logging & Performance ---
+*.log
+sync-log.json
+
+# --- IDEs ---
+.vscode/
+.idea/
+.DS_Store
