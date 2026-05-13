@@ -86,10 +86,11 @@ contract EtherVault is ReentrancyGuard, OwnableUpgradeable, UUPSUpgradeable {
         vault.fee = _newfee;
     }
 
-    function withdrawFee(address reciever) public onlyOwner {
+    function withdrawFee(address reciever) public onlyOwner nonReentrant(){
         uint256 feeAmount = address(this).balance - vault.totalDeposit;
         (bool success,) = reciever.call{value: feeAmount}("");
         if (!success) revert TransferUnsuccessful();
+        emit FeeWithdrawn(reciever, feeAmount);
     }
 
     function feeBalance() public view returns (uint256 balance) {
