@@ -68,6 +68,7 @@ contract EtherVault is ReentrancyGuard, OwnableUpgradeable, UUPSUpgradeable {
         vault.totalDeposit += userAmount;
         userData[msg.sender].balance += userAmount;
         userData[msg.sender].timestamp = block.timestamp;
+        emit Deposit(msg.sender, userAmount);
     }
 
     function withdraw(uint256 amount) public paused nonReentrant returns (uint256) {
@@ -78,6 +79,7 @@ contract EtherVault is ReentrancyGuard, OwnableUpgradeable, UUPSUpgradeable {
 
         (bool success,) = msg.sender.call{value: amount}("");
         if (!success) revert TransferUnsuccessful();
+        emit Withdraw(msg.sender, amount);
 
         return amount;
     }
